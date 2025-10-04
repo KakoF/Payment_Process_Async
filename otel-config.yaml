@@ -1,0 +1,38 @@
+receivers:
+  otlp:
+    protocols:
+      grpc: {} # Habilita OTLP/gRPC na porta 4317
+      http: {} # Habilita OTLP/HTTP na porta 4318
+
+processors:
+  batch: {} # Agrupa dados para envio em lote (reduz overhead)
+
+#processors:
+#  batch: {}
+#  resource:
+#    attributes:
+#      - key: app
+#        action: upsert
+#      - key: env
+#        action: upsert
+#      - key: host.name
+#        action: upsert
+
+exporters:
+  debug:
+    verbosity: detailed
+
+service:
+  pipelines:
+    traces: # Pipeline para traces (se não quiser, remova)
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug]
+    metrics: # Pipeline para métricas (se não quiser, remova)
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug]
+    logs: # Pipeline para logs
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [debug]
