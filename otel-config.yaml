@@ -1,38 +1,40 @@
 receivers:
   otlp:
     protocols:
-      grpc: {} # Habilita OTLP/gRPC na porta 4317
-      http: {} # Habilita OTLP/HTTP na porta 4318
+      grpc: {}
+      http: {}
 
 processors:
-  batch: {} # Agrupa dados para envio em lote (reduz overhead)
-
-#processors:
-#  batch: {}
-#  resource:
-#    attributes:
-#      - key: app
-#        action: upsert
-#      - key: env
-#        action: upsert
-#      - key: host.name
-#        action: upsert
+  batch: {}
 
 exporters:
-  debug:
-    verbosity: detailed
+  # Para Jaeger (via OTLP)
+  otlp/jaeger:
+    endpoint: "jaeger:4317"
+    tls:
+      insecure: true
+
+  # Para Prometheus
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+    resource_to_telemetry_conversion:
+      enabled: true
+
+  # Para Loki - CONFIGURAÇÃO 100% FUNCIONAL
+  loki:
+    endpoint: "http://loki:3100/loki/api/v1/push"
 
 service:
   pipelines:
-    traces: # Pipeline para traces (se não quiser, remova)
+    traces:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug]
-    metrics: # Pipeline para métricas (se não quiser, remova)
+      exporters: [otlp/jaeger]
+    metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug]
-    logs: # Pipeline para logs
+      exporters: [prometheus]
+    logs:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug]
+      exporters: [loki]

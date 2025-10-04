@@ -11,6 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.AddConfigurations();
 builder.AddServices();
+builder.AddOtel();
+builder.AddLog();
 
 var app = builder.Build();
 

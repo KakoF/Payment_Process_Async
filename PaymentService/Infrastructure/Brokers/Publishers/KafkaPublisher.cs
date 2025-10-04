@@ -22,7 +22,6 @@ namespace Infrastructure.Brokers.Publishers
         {
             string stringMessage = JsonSerializer.Serialize(message);
             var result = await _producer.ProduceAsync(topic, new Message<Null, string> { Value = stringMessage });
-            Console.WriteLine($"Mensagem publicada: {result.Value} em {result.TopicPartitionOffset}");
         }
 	}
 }

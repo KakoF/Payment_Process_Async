@@ -2,6 +2,7 @@
 using Domain.Interfaces.Application;
 using Domain.Interfaces.Infrastructure;
 using Infrastructure.Brokers.Publishers;
+using Infrastructure.Meters;
 
 namespace WebAPI.Extensions
 {
@@ -11,6 +12,7 @@ namespace WebAPI.Extensions
         {
             builder.Services.AddSingleton<IMessagePublisher, KafkaPublisher>();
             builder.Services.AddSingleton<IPaymentService, PaymentService>();
-        }
+			builder.Services.AddSingleton<MetricsHelper>();
+		}
     }
 }
