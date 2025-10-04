@@ -40,6 +40,7 @@ namespace WebAPI.Extensions
 			 .WithTracing(tracing => tracing
 				 .AddAspNetCoreInstrumentation()
 				 .AddConfluentKafkaInstrumentation()
+				 //.AddHttpClientInstrumentation()
 				 .SetResourceBuilder(resourceBuilder)
 				 .AddOtlpExporter(opt =>
 				 {
