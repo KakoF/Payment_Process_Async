@@ -11,5 +11,11 @@
 			return new PaymentSended() { Id = id, Status = "Payment success sended" };
 
         }
-    }
+
+		public static PaymentSended New(Guid id)
+		{
+			return new PaymentSended() { Id = id, Status = "Payment already sended" };
+
+		}
+	}
 }

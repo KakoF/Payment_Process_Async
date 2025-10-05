@@ -4,6 +4,6 @@ namespace Domain.Interfaces.Application
 {
 	public interface IPaymentService
 	{
-        Task<PaymentSended> Handle(CreatePaymentRequest request);
+        Task<PaymentSended> Handle(CreatePaymentRequest request, Guid idempotencyKey);
     }
 }

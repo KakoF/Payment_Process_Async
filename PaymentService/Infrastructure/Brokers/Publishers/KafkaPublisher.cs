@@ -1,5 +1,5 @@
 ﻿using Confluent.Kafka;
-using Domain.Interfaces.Infrastructure;
+using Domain.Interfaces.Infrastructure.Brokers;
 using Infrastructure.Configurations;
 using System.Text.Json;
 namespace Infrastructure.Brokers.Publishers

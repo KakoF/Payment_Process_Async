@@ -1,4 +1,4 @@
-﻿namespace Domain.Interfaces.Infrastructure
+﻿namespace Domain.Interfaces.Infrastructure.Brokers
 {
 	public interface IMessagePublisher
     {

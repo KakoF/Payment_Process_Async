@@ -3,6 +3,7 @@
     public class PaymentModel
     {
         public Guid PaymentId { get; private set; }
+        public Guid IdempotencyKey { get; private set; }
 
         public decimal Amount { get; private set; }
 
@@ -11,19 +12,20 @@
         public PartyModel Sender { get; private set; } = null!;
 
         public PartyModel Receiver { get; private set; } = null!;
-        private PaymentModel(Guid paymentId, decimal amount, DateTime createtAt, PartyModel sender, PartyModel receiver)
+        private PaymentModel(Guid paymentId, Guid idempotencyKey, decimal amount, DateTime createtAt, PartyModel sender, PartyModel receiver)
         {
             PaymentId = paymentId;
-            Amount = amount;
+            IdempotencyKey = idempotencyKey;
+			Amount = amount;
             CreatetAt = createtAt;
             Sender = sender;
             Receiver = receiver;
         }
 
-        public static PaymentModel Create(decimal amount, PartyModel sender, PartyModel receiver)
+        public static PaymentModel Create(Guid idempotencyKey, decimal amount, PartyModel sender, PartyModel receiver)
         {
 
-            return new PaymentModel(Guid.NewGuid(), amount, DateTime.Now, sender, receiver);
+            return new PaymentModel(Guid.NewGuid(), idempotencyKey, amount, DateTime.Now, sender, receiver);
         }
     }
 }
