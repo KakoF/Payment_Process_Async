@@ -1,5 +1,6 @@
 using Domain.Interfaces.Application;
 using Domain.Records;
+using Domain.Records.CreatePayment;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Filters;
@@ -21,9 +22,10 @@ namespace WebAPI.Controllers
 		}
 
 		[HttpPost]
+		[TypeFilter(typeof(ValidationFilter<CreatePaymentRequest>))]
 		[TypeFilter(typeof(IdempotencyFilter))]
 		[SwaggerHeader("Idempotency-Key", "Chave para controle de idempotência", true)]
-		public async Task<PaymentSended> CreatePaymentAsync([FromBody] CreatePaymentRequest request)
+		public async Task<PaymentSendedResponse> CreatePaymentAsync([FromBody] CreatePaymentRequest request)
 		{
 			var idempotencyKey = Request.Headers["Idempotency-Key"].FirstOrDefault()!;
 			return await _service.Handle(request, Guid.Parse(idempotencyKey));

@@ -1,4 +1,6 @@
 using Infrastructure.Configurations;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 using WebAPI.Extensions;
 using WebAPI.Filters.SwaggerFilters;
 using WebAPI.Middlewares;
@@ -36,5 +38,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseMiddleware(typeof(ErrorHandlingMiddleware));
+
+app.UseEnglishLocalization();
 
 app.Run();

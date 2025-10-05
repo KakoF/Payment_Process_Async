@@ -3,6 +3,8 @@ using Domain.Interfaces.Application;
 using Domain.Interfaces.Infrastructure.Brokers;
 using Domain.Interfaces.Infrastructure.Idempotency;
 using Domain.Interfaces.Infrastructure.Redis;
+using Domain.Records.CreatePayment;
+using FluentValidation;
 using Infrastructure.Brokers.Publishers;
 using Infrastructure.Idempotency;
 using Infrastructure.Meters;
@@ -21,6 +23,9 @@ namespace WebAPI.Extensions
 			builder.Services.AddScoped<IRedisCacheService, RedisCacheService>();
 			builder.Services.AddScoped<IIdempotencyService, IdempotencyService>();
 			builder.Services.AddScoped<IdempotencyFilter>();
+			builder.Services.AddScoped(typeof(ValidationFilter<>));
+			builder.Services.AddScoped<IValidator<CreatePaymentRequest>, CreatePaymentValidator>();
+
 
 		}
 	}

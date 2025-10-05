@@ -1,9 +1,10 @@
 ﻿using Domain.Records;
+using Domain.Records.CreatePayment;
 
 namespace Domain.Interfaces.Application
 {
 	public interface IPaymentService
 	{
-        Task<PaymentSended> Handle(CreatePaymentRequest request, Guid idempotencyKey);
+        Task<PaymentSendedResponse> Handle(CreatePaymentRequest request, Guid idempotencyKey);
     }
 }

@@ -14,14 +14,14 @@ namespace Infrastructure.Idempotency
 			_cache = cache;
 		}
 
-		public async Task<PaymentSended?> AlreadyProcessAsync(Guid key)
+		public async Task<PaymentSendedResponse?> AlreadyProcessAsync(Guid key)
 		{
-			return await _cache.GetAsync<PaymentSended>(Prefix + key);
+			return await _cache.GetAsync<PaymentSendedResponse>(Prefix + key);
 		}
 
 		public async Task SetNewProcessAsync(Guid key)
 		{
-			var payment = PaymentSended.New(key);
+			var payment = PaymentSendedResponse.New(key);
 			await _cache.SetAsync(Prefix + key, payment, TimeSpan.FromMinutes(1));
 		}
 	}

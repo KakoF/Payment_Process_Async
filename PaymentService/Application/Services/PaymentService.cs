@@ -2,6 +2,7 @@
 using Domain.Interfaces.Infrastructure.Brokers;
 using Domain.Models;
 using Domain.Records;
+using Domain.Records.CreatePayment;
 using Infrastructure.Meters;
 
 namespace Application.Services
@@ -15,7 +16,7 @@ namespace Application.Services
 			_publisher = publisher;
 			_metrics = metricsHelper;
         }
-		public async Task<PaymentSended> Handle(CreatePaymentRequest request, Guid idempotencyKey)
+		public async Task<PaymentSendedResponse> Handle(CreatePaymentRequest request, Guid idempotencyKey)
 		{
 			var sender = PartyModel.Create(request.Sender.Name, request.Sender.Document);
 			var receiver = PartyModel.Create(request.Receiver.Name, request.Receiver.Document);
@@ -26,7 +27,7 @@ namespace Application.Services
 
 			await _publisher.PublishAsync("payment.created", model);
 
-			return PaymentSended.Success(model.IdempotencyKey);
+			return PaymentSendedResponse.Success(model.IdempotencyKey);
 		}
 	}
 }
