@@ -21,7 +21,8 @@ namespace Application.Services
 			var receiver = PartyModel.Create(request.Receiver.Name, request.Receiver.Document);
             var model = PaymentModel.Create(idempotencyKey, request.Amount, sender, receiver);
 
-			_metrics.RecordCounter("payment.created"); 
+			_metrics.RecordCounter("payment.created",
+				tags: new KeyValuePair<string, object>("idempotencyKey", idempotencyKey));
 
 			await _publisher.PublishAsync("payment.created", model);
 
