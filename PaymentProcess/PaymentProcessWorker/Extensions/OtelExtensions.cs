@@ -24,7 +24,8 @@ namespace PaymentProcessWorker.Extensions
 
             builder.Services.AddOpenTelemetry()
             .WithTracing(tracing => tracing
-                 .AddAspNetCoreInstrumentation()
+			     .AddSource("PaymentProcess")
+				 .AddAspNetCoreInstrumentation()
                  .AddConfluentKafkaInstrumentation()
                  .SetResourceBuilder(resourceBuilder)
                  .AddOtlpExporter(opt =>
@@ -39,7 +40,7 @@ namespace PaymentProcessWorker.Extensions
                  .AddProcessInstrumentation()
                  .AddEventCountersInstrumentation(options =>
                  {
-                     options.AddEventSources("Microsoft.AspNetCore.Hosting", "System.Net.Http");
+                     options.AddEventSources("Microsoft.AspNetCore.Hosting");
                  })
                  .AddMeter($"{appName}.*")
                  .AddOtlpExporter(options =>

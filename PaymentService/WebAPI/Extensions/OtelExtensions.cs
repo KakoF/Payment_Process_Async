@@ -38,7 +38,8 @@ namespace WebAPI.Extensions
 					 options.Endpoint = new Uri(otelUrl);
 				 }))
 			 .WithTracing(tracing => tracing
-				 .AddAspNetCoreInstrumentation()
+                 .AddSource("PaymentService")
+                 .AddAspNetCoreInstrumentation()
 				 .AddConfluentKafkaInstrumentation()
 				 //.AddHttpClientInstrumentation()
 				 .SetResourceBuilder(resourceBuilder)

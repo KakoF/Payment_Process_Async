@@ -25,7 +25,7 @@ namespace Application.Services
 			_metrics.RecordCounter("payment.created",
 				tags: new KeyValuePair<string, object>("idempotencyKey", idempotencyKey));
 
-			await _publisher.PublishAsync("payment.created", model);
+			await _publisher.PublishAsync("payment.created", model, idempotencyKey.ToString());
 
 			return PaymentSendedResponse.Success(model.IdempotencyKey);
 		}

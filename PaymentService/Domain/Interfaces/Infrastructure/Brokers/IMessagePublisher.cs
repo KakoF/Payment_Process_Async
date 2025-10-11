@@ -2,6 +2,6 @@
 {
 	public interface IMessagePublisher
     {
-        Task PublishAsync(string topic, object message);
+        Task PublishAsync(string topic, object message, string? key = null);
     }
 }
