@@ -8,9 +8,9 @@ namespace WebAPI.Filters
 {
 	public class IdempotencyFilter : IAsyncActionFilter
 	{
-		private readonly IIdempotencyService _idempotencyService;
+		private readonly IIdempotencyStorage _idempotencyService;
 
-		public IdempotencyFilter(IIdempotencyService idempotencyService)
+		public IdempotencyFilter(IIdempotencyStorage idempotencyService)
 		{
 			_idempotencyService = idempotencyService;
 		}

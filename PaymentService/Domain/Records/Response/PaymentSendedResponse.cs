@@ -1,4 +1,4 @@
-﻿namespace Domain.Records
+﻿namespace Domain.Records.Response
 {
 	public class PaymentSendedResponse
 	{

@@ -1,8 +1,8 @@
 ﻿using Domain.Interfaces.Application;
 using Domain.Interfaces.Infrastructure.Brokers;
 using Domain.Models;
-using Domain.Records;
 using Domain.Records.CreatePayment;
+using Domain.Records.Response;
 using Infrastructure.Meters;
 
 namespace Application.Services

@@ -4,12 +4,12 @@ using System.Text.Json;
 
 namespace Infrastructure.Redis
 {
-	public class RedisCacheService : IRedisCacheService
+	public class Redis : Domain.Interfaces.Infrastructure.Redis.IRedis
 	{
 		private readonly IDatabase _db;
 		private const string Prefix = "Payment:";
 
-		public RedisCacheService(IConnectionMultiplexer redis)
+		public Redis(IConnectionMultiplexer redis)
 		{
 			_db = redis.GetDatabase();
 		}

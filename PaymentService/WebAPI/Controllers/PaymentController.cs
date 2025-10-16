@@ -1,6 +1,6 @@
 using Domain.Interfaces.Application;
-using Domain.Records;
 using Domain.Records.CreatePayment;
+using Domain.Records.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebAPI.Filters;

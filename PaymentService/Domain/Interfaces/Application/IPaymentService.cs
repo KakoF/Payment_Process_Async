@@ -1,5 +1,5 @@
-﻿using Domain.Records;
-using Domain.Records.CreatePayment;
+﻿using Domain.Records.CreatePayment;
+using Domain.Records.Response;
 
 namespace Domain.Interfaces.Application
 {

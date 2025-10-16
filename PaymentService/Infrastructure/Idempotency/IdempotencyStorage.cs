@@ -1,15 +1,15 @@
 ﻿using Domain.Interfaces.Infrastructure.Idempotency;
 using Domain.Interfaces.Infrastructure.Redis;
-using Domain.Records;
+using Domain.Records.Response;
 
 namespace Infrastructure.Idempotency
 {
-	public class IdempotencyService : IIdempotencyService
+	public class IdempotencyStorage : IIdempotencyStorage
 	{
-		private readonly IRedisCacheService _cache;
+		private readonly IRedis _cache;
 		private const string Prefix = "Idempotency:";
 
-		public IdempotencyService(IRedisCacheService cache)
+		public IdempotencyStorage(IRedis cache)
 		{
 			_cache = cache;
 		}

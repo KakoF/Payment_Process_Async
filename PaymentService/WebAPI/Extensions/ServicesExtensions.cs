@@ -20,8 +20,8 @@ namespace WebAPI.Extensions
             builder.Services.AddSingleton<IMessagePublisher, KafkaPublisher>();
             builder.Services.AddSingleton<IPaymentService, PaymentService>();
 			builder.Services.AddSingleton<MetricsHelper>();
-			builder.Services.AddScoped<IRedisCacheService, RedisCacheService>();
-			builder.Services.AddScoped<IIdempotencyService, IdempotencyService>();
+			builder.Services.AddScoped<IRedis, Redis>();
+			builder.Services.AddScoped<IIdempotencyStorage, IdempotencyStorage>();
 			builder.Services.AddScoped<IdempotencyFilter>();
 			builder.Services.AddScoped(typeof(ValidationFilter<>));
 			builder.Services.AddScoped<IValidator<CreatePaymentRequest>, CreatePaymentValidator>();
